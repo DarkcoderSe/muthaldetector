@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/wordnet', function(Request $request) {
+    $word = $request->get('word');
+
+    // dd($word);
+    $result = shell_exec('wn '.$word.' -synsn');
+
+    return response()->json($result, 200);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
